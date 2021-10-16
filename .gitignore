@@ -12,6 +12,9 @@ _dashboard/migrations
 frontend/__pycache__
 frontend/migrations
 
+account/__pycache__
+account/migrations
+
 media
 .env
 
