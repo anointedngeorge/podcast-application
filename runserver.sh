@@ -1,0 +1,1 @@
+while true; do python3 manage.py runserver; sleep 1; done

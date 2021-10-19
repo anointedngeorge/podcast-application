@@ -49,7 +49,11 @@
         <!-- Profile image -->
 
         <div id="branding">
-            {% block branding %}{% endblock %}
+            {% if request.user.is_superuser %}
+                {% block branding %}{% endblock %}
+            {% else %}
+                <h1>{{request.user.roles.capitalize}} Account Dashboard</h1>
+            {% endif %}
         </div>
         
         {% block usertools %}

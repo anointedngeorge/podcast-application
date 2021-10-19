@@ -1,4 +1,5 @@
 
+from typing import get_args
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -38,7 +39,7 @@ class CustomAccountManager(BaseUserManager):
     def create_user(self, first_name=None ,last_name=None , email=None, password=None, roles=None, **other_fields):
         try:  
             if not email:
-                raise ValueError(_('You must provide an email address!'))
+                raise ValueError(_('You must provide an email address!!!'))
             email = self.normalize_email(email)
             user = self.model(first_name=first_name, last_name=last_name, email=email, roles = roles, **other_fields)
             user.set_password(password)
@@ -69,6 +70,8 @@ class AppAuthUser(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         verbose_name_plural = "Authentication"
+
+
     
     
 

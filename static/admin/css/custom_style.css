@@ -1,4 +1,10 @@
 
+caption{
+  background: rgba(1, 30, 49) !important;
+  color:#fff !important;
+}
+
+
 div#link-container{
     margin:20px;
     width: 100%;
@@ -8,12 +14,6 @@ div#link-container > .link-content{
     display: inline-block;
 }
 
-@media screen {
-    
-   
-    
-
-}
 
 a{
     text-decoration: none;
@@ -42,10 +42,6 @@ a{
 }
 
 
-/* div#printout-area{
-   
-} */
-
 
 @media print {
     body * {
@@ -63,7 +59,7 @@ a{
 
 
   #header{
-      background: rgb(2, 65, 94) !important;
+      background: rgb(4, 36, 73) !important;
   }
 
 
@@ -76,4 +72,10 @@ a{
   div.breadcrumbs{
     background: rgb(2, 23, 51) !important;
     /* color:#fff !important; */
+  }
+
+
+  .module h2{
+    background: rgb(1, 14, 31) !important;
+    color: #fff !important;
   }
