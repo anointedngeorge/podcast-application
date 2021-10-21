@@ -63,31 +63,10 @@ https://templatemo.com/tm-558-klassy-cafe
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                            <li class="scroll-to-section"><a href="#about">About</a></li>
-                           	
-                        <!-- 
-                            <li class="submenu">
-                                <a href="javascript:;">Drop Down</a>
-                                <ul>
-                                    <li><a href="#">Drop Down Page 1</a></li>
-                                    <li><a href="#">Drop Down Page 2</a></li>
-                                    <li><a href="#">Drop Down Page 3</a></li>
-                                </ul>
-                            </li>
-                        -->
-                            <li class="scroll-to-section"><a href="#menu">Menu</a></li>
-                            <li class="scroll-to-section"><a href="#chefs">Chefs</a></li> 
-                            <li class="submenu">
-                                <a href="javascript:;">Features</a>
-                                <ul>
-                                    <li><a href="#">Features Page 1</a></li>
-                                    <li><a href="#">Features Page 2</a></li>
-                                    <li><a href="#">Features Page 3</a></li>
-                                    <li><a href="#">Features Page 4</a></li>
-                                </ul>
-                            </li>
-                            <!-- <li class=""><a rel="sponsored" href="https://templatemo.com" target="_blank">External URL</a></li> -->
-                            <li class="scroll-to-section"><a href="#reservation">Contact Us</a></li> 
+                            <li class="scroll-to-section"><a href="#menu">Podcast</a></li>
+
+                            <li class="scroll-to-section"><a href="/dashboard">Login</a></li>
+                            <li class="scroll-to-section"><a href="" class="text text-danger">Become a member</a></li>
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -110,7 +89,7 @@ https://templatemo.com/tm-558-klassy-cafe
                             <h4>{% appsettings "site_title" %}</h4>
                             <h6>{% appsettings "tagline_title" %}</h6>
                             <div class="main-white-button scroll-to-section">
-                                <a href="#reservation">Make A Reservation</a>
+                                <a href="#">Become a member</a>
                             </div>
                         </div>
                     </div>
@@ -146,10 +125,10 @@ https://templatemo.com/tm-558-klassy-cafe
      <section class="section" id="offers">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 offset-lg-4 text-center">
+                <div class="col-lg-4 offset-lg-4 ">
                     <div class="section-heading">
-                        <h6>Newest Podcast</h6>
-                        <h2>This Week’s Special</h2>
+                        <h6>Trending...</h6>
+                        <h2 class="text">This Week’s Special</h2>
                     </div>
                 </div>
             </div>
@@ -170,41 +149,34 @@ https://templatemo.com/tm-558-klassy-cafe
                             </div>
                         </div>
                         <div class="col-lg-12">
-                            <section class='tabs-content'>
-                                <article id='tabs-1'>
-                                    <div class="row">
-                                    {% for pod in podcast %}
-                                    {% if pod.approve %}
-                                        <div class="col-lg-6">
-                                            <div class="row">
-                                                <div class="left-list">
-                                                    <div class="col-lg-12">
-                                                        <div class="tab-item">
-                                                            <img src="media/{{pod.cover}}" alt="">
-                                                            <h4 class="pl-3">{{pod.title}}</h4>
-                                                            {% if pod.description != None %}
-                                                                    {{pod.description|safe}}
-                                                            {% else %}
-                                                                <p>Lor ipsum dolor sit amet consectetur, adipisicing elit. Totam voluptatibus odit unde fugiat alias nobis vero, earum minima debitis magni quos qui!</p>
-                                                            {% endif %}
-                                                            
-                                                            <div class="price">
-                                                                <h6 style="font-size:12px; min-height:30px;">{{pod.type}}</h6>
-                                                            </div>
-                                                            <div class="bg-danger p-1 rounded rounded-sm text text-white text-center" style="font-size: 10px;">
-                                                                <span class="mr-4">Upload date:{{pod.upload_at}}</span>
-                                                                <span class="ml-4">Posted By: {{pod.user}}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <section class='tabs-conten'>
+                               <div class="row">
+                                {% for pod in podcast_lastest %}
+                                {% if pod.approve %}
+                                     <div class="col-lg-3 bg-white shadow p-3">
+                                        <div class="mb-2">
+                                            <h6 class="text text-danger">{{pod.type}}</h6>
                                         </div>
-                                        {% endif %}
-                                    {% endfor %}
-
-                                    </div>
-                                </article>  
+                                         <div>
+                                            <img src="media/{{pod.cover}}" alt="" style="width:100% !important; 
+                                            height:200px !important; border-radius:10px;">
+                                         </div>
+                                            <div class="mt-4 mb-4"><h3 class="text text-center" style="font-weight: 500;">{{pod.title}}</h3></div>
+                                            <div>
+                                                {% if pod.description != None %}
+                                                {{pod.description|safe}}
+                                                {% else %}
+                                                    <p>Lor ipsum dolor sit amet consectetur, adipisicing elit. Totam voluptatibus odit unde fugiat alias nobis vero, earum minima debitis magni quos qui!</p>
+                                                {% endif %}
+                                            </div>
+                                            <div class="bg-danger p-1 rounded rounded-sm text text-white text-center" style="font-size: 10px;">
+                                                <span class="mr-">Upload date:{{pod.upload_at}}</span> |
+                                                <span class="ml-">Posted By: {{pod.user.username}}</span>
+                                            </div>
+                                     </div>
+                                {% endif %}
+                                {% endfor %}
+                               </div>
                                
                             </section>
                         </div>
@@ -287,6 +259,7 @@ https://templatemo.com/tm-558-klassy-cafe
                 <div class="col-lg-4 offset-lg-4 text-center">
                     <div class="section-heading">
                         <h6> Active Users </h6>
+                        {{ profile|length}}
                         <h2>We offer the best sevice plateform for you</h2>
                     </div>
                 </div>
@@ -332,24 +305,24 @@ https://templatemo.com/tm-558-klassy-cafe
             <div class="row">
                 <div class="col-lg-6 align-self-center">
                     <div class="left-text-content">
-                        <div class="section-heading">
+                        <div class="section-heading bg-danger p-3">
                             <h6>Contact Us</h6>
                             <h2>Here You Can Make A Reservation Or Just walkin to our cafe</h2>
                         </div>
-                        <p>Donec pretium est orci, non vulputate arcu hendrerit a. Fusce a eleifend riqsie, namei sollicitudin urna diam, sed commodo purus porta ut.</p>
+                    
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="phone">
                                     <i class="fa fa-phone"></i>
                                     <h4>Phone Numbers</h4>
-                                    <span><a href="#">080-090-0990</a><br><a href="#">080-090-0880</a></span>
+                                    <span><a href="#">{% appsettings "phone1" %}</a><br><a href="#">{% appsettings "phone2" %}</a></span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="message">
                                     <i class="fa fa-envelope"></i>
                                     <h4>Emails</h4>
-                                    <span><a href="#">hello@company.com</a><br><a href="#">info@company.com</a></span>
+                                    <span><a href="#">{% appsettings "email1" %}</a><br><a href="#">{% appsettings "email2" %}</a></span>
                                 </div>
                             </div>
                         </div>
@@ -360,7 +333,7 @@ https://templatemo.com/tm-558-klassy-cafe
                         <form id="contact" action="" method="post">
                           <div class="row">
                             <div class="col-lg-12">
-                                <h4>Table Reservation</h4>
+                                <h4>Reach us</h4>
                             </div>
                             <div class="col-lg-6 col-sm-12">
                               <fieldset>
@@ -377,25 +350,7 @@ https://templatemo.com/tm-558-klassy-cafe
                                 <input name="phone" type="text" id="phone" placeholder="Phone Number*" required="">
                               </fieldset>
                             </div>
-                            <div class="col-md-6 col-sm-12">
-                              <fieldset>
-                                <select value="number-guests" name="number-guests" id="number-guests">
-                                    <option value="number-guests">Number Of Guests</option>
-                                    <option name="1" id="1">1</option>
-                                    <option name="2" id="2">2</option>
-                                    <option name="3" id="3">3</option>
-                                    <option name="4" id="4">4</option>
-                                    <option name="5" id="5">5</option>
-                                    <option name="6" id="6">6</option>
-                                    <option name="7" id="7">7</option>
-                                    <option name="8" id="8">8</option>
-                                    <option name="9" id="9">9</option>
-                                    <option name="10" id="10">10</option>
-                                    <option name="11" id="11">11</option>
-                                    <option name="12" id="12">12</option>
-                                </select>
-                              </fieldset>
-                            </div>
+                    
                             <div class="col-lg-6">
                                 <div id="filterDate2">    
                                   <div class="input-group date" data-date-format="dd/mm/yyyy">
@@ -406,16 +361,7 @@ https://templatemo.com/tm-558-klassy-cafe
                                   </div>
                                 </div>   
                             </div>
-                            <div class="col-md-6 col-sm-12">
-                              <fieldset>
-                                <select value="time" name="time" id="time">
-                                    <option value="time">Time</option>
-                                    <option name="Breakfast" id="Breakfast">Breakfast</option>
-                                    <option name="Lunch" id="Lunch">Lunch</option>
-                                    <option name="Dinner" id="Dinner">Dinner</option>
-                                </select>
-                              </fieldset>
-                            </div>
+                            
                             <div class="col-lg-12">
                               <fieldset>
                                 <textarea name="message" rows="6" id="message" placeholder="Message" required=""></textarea>
@@ -423,7 +369,7 @@ https://templatemo.com/tm-558-klassy-cafe
                             </div>
                             <div class="col-lg-12">
                               <fieldset>
-                                <button type="submit" id="form-submit" class="main-button-icon">Make A Reservation</button>
+                                <button type="submit" id="form-submit" class="main-button-icon">Contact us</button>
                               </fieldset>
                             </div>
                           </div>
@@ -438,23 +384,7 @@ https://templatemo.com/tm-558-klassy-cafe
 <!-- model -->
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
 <!-- model -->
 
@@ -485,9 +415,9 @@ https://templatemo.com/tm-558-klassy-cafe
                 </div>
                 <div class="col-lg-4 col-xs-12">
                     <div class="left-text-content">
-                        <p>© Copyright Klassy Cafe Co.
+                        <p>© Copyright {% appsettings "tagline_title" %}
                         
-                        <br>Design: TemplateMo</p>
+                        <br>Design: Team</p>
                     </div>
                 </div>
             </div>

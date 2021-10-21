@@ -91,3 +91,18 @@ a{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     padding: 1px;
   }
+
+
+  #reload-server{
+    border:none; padding:10px; 
+    cursor: pointer; 
+    border-radius:15px; 
+    background: lightgoldenrodyellow; 
+    box-shadow:0 3px 5px #000;
+  }
+
+  #reload-server:hover{
+    padding:10px; 
+    cursor: pointer; 
+    box-shadow:none;
+  }

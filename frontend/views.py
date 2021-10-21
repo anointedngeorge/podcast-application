@@ -20,8 +20,9 @@ from account.models import ApplicationSettings
 
 def indexpage(request):
     context = {}
-    context['podcast'] =  Podcast.objects.all()
-    context['slider'] =  Sliders.objects.all()
-    context['profile'] =  Profile.objects.all()
-    context['category'] =  Category.objects.all()
+    context['podcast_lastest'] =  Podcast.objects.all().order_by('upload_at')
+    context['podcast'] =  Podcast.objects.all().filter(approve = True)
+    context['slider'] =  Sliders.objects.all().filter(approve = True)
+    context['profile'] =  Profile.objects.all().filter(approve = True)
+    context['category'] =  Category.objects.all().filter(approve = True)
     return render(request, 'klassy/index.html', context=context)

@@ -17,6 +17,7 @@ class Sliders(models.Model):
     sub_title = models.CharField(max_length = 150, null=True, blank=True)
     description = models.TextField()
     bg_image = models.ForeignKey(Gallary, on_delete=models.CASCADE, null=True, verbose_name="Background Image Cover")
+    approve = models.BooleanField(default=False)
     
     class Meta:
         verbose_name_plural = "Add Slider"

@@ -56,6 +56,12 @@ class ApplicationSettings(models.Model):
     site_descriptions = models.TextField(blank=True, null=True)
     site_logo =  models.ForeignKey(Gallary, on_delete=models.CASCADE, related_name='sitelogo', null=True)
     site_favicon =  models.ForeignKey(Gallary, on_delete=models.CASCADE, related_name='sitefaviconlogo', null=True)
+    phone1 = models.CharField(max_length = 150, null=True)
+    phone2 = models.CharField(max_length = 150, null=True, blank=True)
+    email1 = models.CharField(max_length = 150, null=True)
+    email2 = models.CharField(max_length = 150, null=True, blank=True)
+    
+    
     google_analytics  = models.TextField(blank=True, null=True)
     
 

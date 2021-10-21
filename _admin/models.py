@@ -145,6 +145,8 @@ class Blog(models.Model):
     description = models.CharField(max_length = 150)
     comment = models.TextField(blank=True, null=True)
     upload_at = models.DateField(auto_now=True,  blank=True, null=True)
+    approve = models.BooleanField(default=False)
+    
     
     
 
@@ -180,10 +182,9 @@ class ExternalPodcast(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True, related_name="externalpodcast")
     title = models.CharField(max_length = 150)
     link = models.URLField(max_length = 200, blank=True, null=True)
-    # description = models.TextField()
     description = RichTextField(blank=True, null=True)
-    approved = models.BooleanField(default=False)
     upload_at = models.DateField(auto_now=True,  blank=True, null=True)
+    approve = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "External Podcast"

@@ -24,10 +24,14 @@
 			</div>
 			<form method="POST" accept="{% url 'account:create_account' %}">
 				{% csrf_token %}
-				{{ forms|crispy }}                    
-				<button class="btn btn-primary btn-block"  type="submit">Register</button>
+				{{ forms|crispy }}      
+
+				<button class="mt-2 mb-4 tn btn-primary"  type="submit" style="width:100%;">Register</button>
 			</form>
-			<p class="text-center">If you already have an account, <a href="/sub-admin">login</a> instead.</p>
+			<center>
+				<span>If you already have an account, <a href="/dashboard">login</a> instead.</span> <br>
+				<span><a href="/">Visit Homepage</a></span>
+			</center>
 	</div>
 </div>
 

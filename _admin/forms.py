@@ -29,7 +29,7 @@ class PodcastForm(forms.ModelForm):
 class BlogForm(forms.ModelForm):
     class Meta:
         model = Blog
-        fields = ['user','type','title',]
+        fields = ['user','type','title','body','thumbnail','description','comment','approve']
 
     def __init__(self, *args, **kwargs):
         super(BlogForm, self).__init__(*args, **kwargs)

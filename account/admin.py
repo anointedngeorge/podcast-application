@@ -36,7 +36,8 @@ class AdminProfileUsers(admin.ModelAdmin):
 @admin.register(ApplicationSettings)
 class GeneralSettings(admin.ModelAdmin):
     search_fields = ['site_title__startwith']
-    list_display = ['site_title','tagline_title','site_descriptions','site_logo','site_favicon']
+    list_display = ['site_title','tagline_title','site_descriptions',
+    'site_logo','site_favicon','phone1','phone2','email1','email2']
 
 
 

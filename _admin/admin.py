@@ -97,6 +97,16 @@ class BlogExtraAdmin(admin.TabularInline):
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
     search_fields = ['title_startwith',]
-    list_display = ['user','type','title',]
+    list_display = ['user','type','title','body','thumbnail','description','comment','approve']
     form =  BlogForm
     inlines = [BlogExtraAdmin]
+    actions = [approve_bulk, reject_bulk]
+
+
+
+
+
+@admin.register(ExternalPodcast)
+class ExternalPodcastAdmin(admin.ModelAdmin):
+    search_fields = ['title_startwith',]
+    list_display = ['user','title','link','description','approve']
