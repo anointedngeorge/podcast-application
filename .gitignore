@@ -17,7 +17,7 @@ account/migrations
 
 _admin/__pycache__
 _admin/migrations
-
+__pycache__
 media
 .env
 
