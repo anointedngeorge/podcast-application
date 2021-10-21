@@ -3,6 +3,7 @@
 {% static 'klassy/images/' as img %}
 {% static 'klassy/css/' as style %}
 {% static 'klassy/js/' as script %}
+{% load social_share %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -175,6 +176,10 @@ https://templatemo.com/tm-558-klassy-cafe
                                                 <span class="mr-">Upload date:{{pod.upload_at}}</span> |
                                                 <span class="ml-">Posted By: {{pod.user.username}}</span>
                                             </div>
+                                        <div class="mt-4">
+                                            <span>{% post_to_facebook object_or_url "Facebook" %}</span>
+                                        </div>
+
                                      </div>
                                 {% endif %}
                                 {% endfor %}
