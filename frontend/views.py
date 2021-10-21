@@ -13,8 +13,15 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth import get_user_model
 from django.conf import settings
-
+from _admin.models import *
+from frontend.models import *
+from account.models import ApplicationSettings
 
 
 def indexpage(request):
-    return HttpResponse('Coming soon...')
+    context = {}
+    context['podcast'] =  Podcast.objects.all()
+    context['slider'] =  Sliders.objects.all()
+    context['profile'] =  Profile.objects.all()
+    context['category'] =  Category.objects.all()
+    return render(request, 'klassy/index.html', context=context)

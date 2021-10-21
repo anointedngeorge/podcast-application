@@ -1,0 +1,16 @@
+{% extends 'admin/change_list.html' %}
+
+
+
+{% block content %}
+{% if request.user.podcast.filter|length == request.user.status.limit %}
+    <div class="change_list_message_banner">
+        <p>You have exhausted you're free account limit ({{request.user.status.limit}}), click <a href="activate-membership/">Activate Membership</a> to upgrade to membership account!</p>
+    </div>
+{% endif %}
+
+
+
+{{block.super}}
+
+{% endblock content %}

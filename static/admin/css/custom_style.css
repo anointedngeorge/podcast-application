@@ -79,3 +79,15 @@ a{
     background: rgb(1, 14, 31) !important;
     color: #fff !important;
   }
+
+
+  .change_list_message_banner{
+    /* background: rgba(100, 3, 3, 0.856) !important; */
+    min-width: 30px !important;
+    color:#000 !important;
+    text-align: center;
+    font-weight: 900;
+    font-size: 12px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 1px;
+  }
