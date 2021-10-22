@@ -167,7 +167,7 @@ https://templatemo.com/tm-558-klassy-cafe
                                             <div class="mt-4 mb-4"><h3 class="text text-center" style="font-weight: 500;">{{pod.title}}</h3></div>
                                             <div>
                                                 {% if pod.description != None %}
-                                                {{pod.description|safe|slice:":255"}}
+                                                {{pod.description|safe|slice:":100"}}
                                                 {% else %}
                                                     <p>Lor ipsum dolor sit amet consectetur, adipisicing elit. Totam voluptatibus odit unde fugiat alias nobis vero, earum minima debitis magni quos qui!</p>
                                                 {% endif %}
