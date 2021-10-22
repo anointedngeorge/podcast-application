@@ -1024,6 +1024,8 @@ menu
 
 #menu .owl-menu-item {
   position: relative;
+  max-height: 400px;
+  overflow: hidden;
 }
 
 #menu .owl-nav {
