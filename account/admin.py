@@ -50,6 +50,9 @@ class GallerySettings(admin.ModelAdmin):
     form = GalleryForm
     actions = [approve_bulk, reject_bulk]
 
+    class Media:
+        js = ['/static/js/fileuploader_with_progress_bar.js']
+
 
     def html_format(self, obj):
         
