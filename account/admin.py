@@ -14,6 +14,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.conf import settings
 import os
+from django.utils.html import format_html
 from _admin.actions import *
 
 @admin.register(Profile)
@@ -45,9 +46,14 @@ class GeneralSettings(admin.ModelAdmin):
 @admin.register(Gallary)
 class GallerySettings(admin.ModelAdmin):
     search_fields = ['user__startwith']
-    list_display = ['user','file','db_table','approve', 'upload_at']
+    list_display = ['user','file','html_format','db_table','approve', 'upload_at']
     form = GalleryForm
     actions = [approve_bulk, reject_bulk]
+
+
+    def html_format(self, obj):
+        
+        return format_html('<img src="{}"  style="width:50px !important; height:50px !important;"/>'.format(obj.file.url))
 
     def delete_queryset(self, request, queryset) -> None:
         for qs in queryset:

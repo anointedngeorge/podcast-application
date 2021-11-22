@@ -9,4 +9,5 @@ from frontend.views import *
 
 urlpatterns = [
     path('', indexpage, name="homepage"),
+    path('view-podcast', view_podcast, name="view-podcast"),
 ]

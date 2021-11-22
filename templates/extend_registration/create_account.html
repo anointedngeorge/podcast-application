@@ -23,7 +23,7 @@
 				<h1>Register</h1>
 			</div>
 			<form method="POST" accept="{% url 'account:create_account' %}">
-				{% csrf_token %}
+				    {% csrf_token %}
 				{{ forms|crispy }}      
 
 				<button class="mt-2 mb-4 tn btn-primary"  type="submit" style="width:100%;">Register</button>

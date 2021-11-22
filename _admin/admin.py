@@ -40,17 +40,22 @@ class MembershipAdmin(admin.ModelAdmin):
 # add extra fields to podcast
 class PodcastExtraAdmin(admin.TabularInline):
     model = PodcastExtra
+
     
 
 @admin.register(Podcast)
 class PodcastAdmin(admin.ModelAdmin):
     search_fields = ['title_startwith',]
-    list_display = ['user','type','title','description','file','cover','approve']
+    list_display = ['approve','user','type','title','format','description_text','file','cover']
     # fields are defined in the PodcastForm form section
+    # list_display_links = ['file','cover']
     form = PodcastForm
     inlines = [PodcastExtraAdmin]
     actions = [approve_bulk, reject_bulk]
     
+
+    def description_text(self, obj):
+        return mark_safe(obj.description)
 
     def save_model(self, request, obj, form, change) -> None:
         if obj.user.is_superuser:

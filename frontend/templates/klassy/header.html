@@ -1,0 +1,91 @@
+{% load static %}
+{% load app_settings_extras %}
+{% static 'klassy/images/' as img %}
+{% static 'klassy/css/' as style %}
+{% static 'klassy/js/' as script %}
+{% load social_share %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="podcast demtyfamily">
+    <meta name="author" content="demtyfamily">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="shortcut icon" href="media/{% appsettings 'site_favicon' %}" type="image/x-icon">
+    <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet" />
+    <title>{% appsettings "site_title" %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{{style}}/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{{style}}/font-awesome.css">
+
+    <link rel="stylesheet" href="{{style}}/templatemo-klassy-cafe.css">
+
+    <link rel="stylesheet" href="{{style}}/owl-carousel.css">
+
+    <link rel="stylesheet" href="{{style}}/lightbox.css">
+
+    <style>
+        
+        .vjs-poster{
+            background-size: cover !important;
+        }
+
+    </style>
+
+    </head>
+    
+    <body>
+    
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>  
+    <!-- ***** Preloader End ***** -->
+    
+    
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/" class="logo">
+                            <img src="media/{% appsettings 'site_logo' %}" style="width:60px; height:60px; border-radius: 100px; " align="klassy cafe html template">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="/" class="active">Home</a></li>
+                            <!-- <li class="scroll-to-section"><a href="">Podcast</a></li> -->
+
+                            <li class="scroll-to-section"><a href="/dashboard">Login</a></li>
+                            <li class="scroll-to-section"><a href="/account" class="text text-danger">Become a member</a></li>
+                        </ul>        
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+
+    {% block content %}
+      
+    {% endblock content %}
+
+    {% include "klassy/footer.html" %}

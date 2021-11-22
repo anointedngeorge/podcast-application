@@ -26,3 +26,14 @@ def indexpage(request):
     context['profile'] =  Profile.objects.all().filter(approve = True)
     context['category'] =  Category.objects.all().filter(approve = True)
     return render(request, 'klassy/index.html', context=context)
+
+
+
+def view_podcast(request):
+    context = {}
+    cat_id = request.GET['cat_id']
+    pod_id = request.GET['pod_id']
+    context['pod'] = Podcast.objects.all().get(id=pod_id)
+    context['all_pod_bycategory'] = Podcast.objects.all().filter(type=cat_id)
+    
+    return render(request, 'klassy/podcast-single.html', context=context)

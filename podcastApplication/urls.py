@@ -19,7 +19,3 @@ urlpatterns = [
     url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ]
 
-
-# admin.site.index_title = "Courier Super Admin"
-# admin.site.site_header = "Super Administrator"
-# admin.site.site_title = "Mobis Chennix Ventures"

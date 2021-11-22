@@ -1,86 +1,14 @@
+
+{% extends 'klassy/header.html' %}
+
 {% load static %}
 {% load app_settings_extras %}
 {% static 'klassy/images/' as img %}
 {% static 'klassy/css/' as style %}
-{% static 'klassy/js/' as script %}
 {% load social_share %}
-<!DOCTYPE html>
-<html lang="en">
 
-  <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="podcast demtyfamily">
-    <meta name="author" content="demtyfamily">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="shortcut icon" href="media/{% appsettings 'site_favicon' %}" type="image/x-icon">
-    
-    <title>{% appsettings "site_title" %}</title>
-<!--
-    
-TemplateMo 558 Klassy Cafe
-
-https://templatemo.com/tm-558-klassy-cafe
-
--->
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" type="text/css" href="{{style}}/bootstrap.min.css">
-
-    <link rel="stylesheet" type="text/css" href="{{style}}/font-awesome.css">
-
-    <link rel="stylesheet" href="{{style}}/templatemo-klassy-cafe.css">
-
-    <link rel="stylesheet" href="{{style}}/owl-carousel.css">
-
-    <link rel="stylesheet" href="{{style}}/lightbox.css">
-
-    </head>
-    
-    <body>
-    
-    <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>  
-    <!-- ***** Preloader End ***** -->
-    
-    
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="/" class="logo">
-                            <img src="media/{% appsettings 'site_logo' %}" style="width:60px; height:60px; border-radius: 100px; " align="klassy cafe html template">
-                        </a>
-                        <!-- ***** Logo End ***** -->
-                        <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
-                            <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                            <li class="scroll-to-section"><a href="#menu">Podcast</a></li>
-
-                            <li class="scroll-to-section"><a href="/dashboard">Login</a></li>
-                            <li class="scroll-to-section"><a href="/account" class="text text-danger">Become a member</a></li>
-                        </ul>        
-                        <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a>
-                        <!-- ***** Menu End ***** -->
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- ***** Header Area End ***** -->
+{% block content %}
 
     <!-- ***** Main Banner Area Start ***** -->
     <div id="top">
@@ -106,6 +34,7 @@ https://templatemo.com/tm-558-klassy-cafe
                             <div class="img-fill" 
                             style="background:url(media/{{slide.bg_image}})no-repeat; background-size:cover; height: 450px;">
                                 <div id="slider-inner-content">
+                                    
                                        <div id="inner">
                                             <h1>{{slide.title}}</h1>
                                             <h4>{{slide.sub_title}}</h4>
@@ -161,8 +90,38 @@ https://templatemo.com/tm-558-klassy-cafe
                                             <h6 class="text text-danger">{{pod.type}}</h6>
                                         </div>
                                          <div>
+                                            {% if pod.format == 'video' %}
+                                            <video
+                                                id="my-video"
+                                                class="video-js"
+                                                controls
+                                                preload="auto"
+                                                poster="media/{{pod.cover}}"
+                                                data-setup="{}"
+
+                                                style="width:100% !important; 
+                                            height:200px !important; border-radius:10px;"
+                                            >
+                                                <source src="media/{{pod.file}}" type="video/mp4" />
+                                                <p class="vjs-no-js">
+                                                To view this video please enable JavaScript, and consider upgrading to a
+                                                web browser that
+                                                </p>
+                                            </video>
+                                        {% elif pod.format == 'audio' %}
                                             <img src="media/{{pod.cover}}" alt="" style="width:100% !important; 
                                             height:200px !important; border-radius:10px;">
+                                                <audio src="media/{{pod.file}}" 
+                                                    style="width:100% !important; 
+                                                    border-radius:10px;"
+                                                    poster="media/{{pod.cover}}" controls>
+                                                </audio>
+                                        {% else %}
+                                            <img src="media/{{pod.cover}}" alt="" style="width:100% !important; 
+                                            height:200px !important; border-radius:10px;">
+                                        {% endif %}
+                                                
+                                           <!-- <audio src="media/{{pod.file}}" controls></audio> -->
                                          </div>
                                             <div class="mt-4 mb-4"><h3 class="text text-center" style="font-weight: 500;">{{pod.title}}</h3></div>
                                             <div>
@@ -217,27 +176,61 @@ https://templatemo.com/tm-558-klassy-cafe
                     {% for pod in cat.podcastcategory.filter %}
                     {% if pod.approve %}
                     <div class="item" >
-                        <div class='card card1' style="background:url(media/{{pod.cover}})no-repeat; background-size:cover;background-position:bottom;">
-                            <div class="price"><h6 style="font-size: 12px !important;">{% podcastDays pod.upload_at %}</h6></div>
-                            <div class='info'>
-                              <h1 class='title'>{{pod.title}}</h1>
-                              {% if pod.bg_cover.description != None %}
-                              <p class='description'>
-                                    {{pod.description}}
-                              </p>
-                              {% else %}
-                              <p class='description'>
-                                   Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, 
-                                   eveniet? Earum molestiae inventore quis ab assumenda animi. Tenetur 
-                                   cupiditate consequatur modi 
-                                   velit obcaecati? Ratione repellendus non nisi sequi quasi dolores.
-                              </p>
-                              {% endif %}
-                              <div class="main-text-button">
-                                  <div class="scroll-to-section"><a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a></div>
-                              </div>
+                      
+                        <div class='card card1'>
+                            <div>
+                                {% if pod.format == 'video' %}
+                                <video
+                                    id="my-video"
+                                    class="video-js"
+                                    controls
+                                    preload="auto"
+                                    poster="media/{{pod.cover}}"
+                                    data-setup="{}"
+
+                                    style="width:100% !important; 
+                                height:200px !important; border-radius:10px;"
+                                >
+                                    <source src="media/{{pod.file}}" type="video/mp4" />
+                                    <p class="vjs-no-js">
+                                    To view this video please enable JavaScript, and consider upgrading to a
+                                    web browser that
+                                    </p>
+                                </video>
+                            {% elif pod.format == 'audio' %}
+                                <img src="media/{{pod.cover}}" alt="" style="width:100% !important; 
+                                height:200px !important; border-radius:10px;">
+                                    <audio src="media/{{pod.file}}" 
+                                        style="width:100% !important; 
+                                        border-radius:10px;"
+                                        poster="media/{{pod.cover}}" controls>
+                                    </audio>
+                            {% else %}
+                                <img src="media/{{pod.cover}}" alt="" style="width:100% !important; 
+                                height:200px !important; border-radius:10px;">
+                            {% endif %}
+                                    
+                               <!-- <audio src="media/{{pod.file}}" controls></audio> -->
+                             </div>
+                            <div class="mt-4">
+                                <h1 class="h3 text text-center">
+                                    <a href="view-podcast?cat_id={{cat.id}}&pod_id={{pod.id}}">{{pod.title}}</a>
+                                </h1>
+                                    <center>
+                                        {% if pod.description|safe != 'None' %}
+                                            {{pod.description|safe|slice:'100'}}
+                                        {% else %}
+                                            <i>No descriition</i>
+                                        {% endif %}
+                                    </center>
+                                    <div class="row">
+                                        <div class="col-lg-12 bg-danger text-white text-center">
+                                            Posted {% podcastDays pod.upload_at %} ago.
+                                        </div>
+                                    </div>
                             </div>
                         </div>
+                
                     </div>
                     {% endif %}
                     {% endfor %}
@@ -311,12 +304,12 @@ https://templatemo.com/tm-558-klassy-cafe
                     <div class="left-text-content">
                         <div class="section-heading bg-danger p-3">
                             <h6>Contact Us</h6>
-                            <h2>Here You Can Make A Reservation Or Just walkin to our cafe</h2>
+                            <h2>Show yourself to the world</h2>
                         </div>
                     
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="phone">
+                                <div class="phone text text-center">
                                     <i class="fa fa-phone"></i>
                                     <h4>Phone Numbers</h4>
                                     <span><a href="#">{% appsettings "phone1" %}</a><br><a href="#">{% appsettings "phone2" %}</a></span>
@@ -384,87 +377,5 @@ https://templatemo.com/tm-558-klassy-cafe
         </div>
     </section>
     <!-- ***** Reservation Area Ends ***** -->
-
-<!-- model -->
-
-<!-- Modal -->
-
-
-<!-- model -->
-
-
-
-
-
-
-    
-    <!-- ***** Footer Start ***** -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-xs-12">
-                    <div class="right-text-content">
-                            <ul class="social-icons">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="logo">
-                        <a href="#" class="text text-white">{% appsettings "site_title" %}</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-xs-12">
-                    <div class="left-text-content">
-                        <p>© Copyright {% appsettings "tagline_title" %}
-                        
-                        <br>Design: Team</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- jQuery -->
-    <script src="{{script}}/jquery-2.1.0.min.js"></script>
-
-    <!-- Bootstrap -->
-    <script src="{{script}}/popper.js"></script>
-    <script src="{{script}}/bootstrap.min.js"></script>
-
-    <!-- Plugins -->
-    <script src="{{script}}/owl-carousel.js"></script>
-    <script src="{{script}}/accordions.js"></script>
-    <script src="{{script}}/datepicker.js"></script>
-    <script src="{{script}}/scrollreveal.min.js"></script>
-    <script src="{{script}}/waypoints.min.js"></script>
-    <script src="{{script}}/jquery.counterup.min.js"></script>
-    <script src="{{script}}/imgfix.min.js"></script> 
-    <script src="{{script}}/slick.js"></script> 
-    <script src="{{script}}/lightbox.js"></script> 
-    <script src="{{script}}/isotope.js"></script> 
-    
-    <!-- Global Init -->
-    <script src="{{script}}/custom.js"></script>
-    <script>
-
-        $(function() {
-            var selectedClass = "";
-            $("p").click(function(){
-            selectedClass = $(this).attr("data-rel");
-            $("#portfolio").fadeTo(50, 0.1);
-                $("#portfolio div").not("."+selectedClass).fadeOut();
-            setTimeout(function() {
-              $("."+selectedClass).fadeIn();
-              $("#portfolio").fadeTo(50, 1);
-            }, 500);
-                
-            });
-        });
-
-    </script>
-  </body>
-</html>
+  
+{% endblock content %}

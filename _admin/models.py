@@ -98,6 +98,7 @@ class Podcast(models.Model):
     # type = models.CharField(max_length = 150, choices=PODCAST_TYPE)
     type = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, related_name="podcastcategory")
     title = models.CharField(max_length = 150)
+    format = models.CharField(max_length=50, null=True, choices=(('video','Video'),('audio','Audio')))
     file  = models.ForeignKey(Gallary, on_delete=models.CASCADE, null=True, related_name="podcastfile")
     cover  = models.ForeignKey(Gallary, on_delete=models.CASCADE, null=True, related_name="podcastcover")
     description = RichTextField(blank=True, null=True)

@@ -14,7 +14,7 @@ from .models import *
 class PodcastForm(forms.ModelForm):
     class Meta:
         model = Podcast
-        fields = ['user','type','description','title','file','cover',]
+        fields = ['user','type','format','description','title','file','cover']
 
     def __init__(self, *args, **kwargs):
         super(PodcastForm, self).__init__(*args, **kwargs)

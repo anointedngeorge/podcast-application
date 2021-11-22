@@ -1,0 +1,64 @@
+{% extends 'klassy/header.html' %}
+
+{% block content %}
+<br><br><br><br><br>
+<div class="col-lg-12 text m-4 p-1"><h1>{{pod.type}}</h1></div>
+  <div class="row p-4">
+        <div class="col-lg-6">
+           <ul class="list-group">
+               {% for pcat in all_pod_bycategory %}
+                 <li class="{% if request.GET.pod_id|safe == pcat.id|safe %} active disabled {% endif %} list-group-item">
+                     <span>{{forloop.counter}}.</span>
+                      <span> 
+                         <a class="text text-warning" href="view-podcast?cat_id={{pcat.type_id}}&pod_id={{pcat.id}}">
+                             {{pcat.title}}
+                            </a>
+                        </span>
+                        <span class="badge badge-dark badge-pill">14</span>
+                 </li>
+               {% endfor %}
+           </ul>
+        </div>
+
+
+        <div class="col-lg-6">
+            <div>
+                {% if pod.format == 'video' %}
+                <video
+                    id="my-video"
+                    class="video-js"
+                    controls
+                    preload="auto"
+                    poster="media/{{pod.cover}}"
+                    data-setup="{}"
+                    style="width:100% !important; 
+                height:300px !important; border-radius:10px;"
+                >
+                    <source src="media/{{pod.file}}" type="video/mp4" />
+                    <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a
+                    web browser that
+                    </p>
+                </video>
+            {% elif pod.format == 'audio' %}
+                <img src="media/{{pod.cover}}" alt="" style="width:100% !important; 
+                height:300px !important; border-radius:10px;">
+                    <audio src="media/{{pod.file}}" 
+                        style="width:100% !important; 
+                        border-radius:10px;"
+                        poster="media/{{pod.cover}}" controls>
+                    </audio>
+            {% else %}
+                <img src="media/{{pod.cover}}" alt="" style="width:100% !important; 
+                height:300px !important; border-radius:10px;">
+            {% endif %}
+
+                    <div class="text text-center mt-4">
+                        <h1>{{pod.title}}</h1>
+                        {{pod.description|safe}}
+                    </div>
+              
+             </div>
+        </div>
+  </div>
+{% endblock content %}
