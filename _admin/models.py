@@ -8,6 +8,7 @@ from django.conf import settings
 from ckeditor.fields import RichTextField
 from all_registered_models import modelname
 from account.models import Gallary
+from django.urls import reverse
 
 
 class Category_group(models.Model):
@@ -67,6 +68,8 @@ class Package(models.Model):
 
      def __str__(self) -> str:
         return f"{self.name}"
+     def get_absolute_url(self):
+         return reverse('', kwargs={'pk': self.pk})
      
      
      
@@ -110,6 +113,11 @@ class Podcast(models.Model):
 
     def __str__(self) -> str:
         return f"{self.title}"
+
+    
+    def get_absolute_url(self):
+         return f"media/{self.file}"
+     
 
 
     
