@@ -37,3 +37,10 @@ def view_podcast(request):
     context['all_pod_bycategory'] = Podcast.objects.all().filter(type=cat_id)
     
     return render(request, 'klassy/podcast-single.html', context=context)
+
+
+def contest_video(request):
+    context = {}
+   
+    
+    return render(request, 'klassy/contest-video.html', context=context)

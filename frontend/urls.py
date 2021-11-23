@@ -9,5 +9,6 @@ app_name = 'frontend'
 
 urlpatterns = [
     path('', indexpage, name="homepage"),
-    path('view-podcast', view_podcast, name="view-podcast"),
+    path('view-podcast/', view_podcast, name="view-podcast"),
+    path('contest/', contest_video, name="contest"),
 ]
