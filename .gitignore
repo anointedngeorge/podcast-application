@@ -15,6 +15,9 @@ frontend/migrations
 account/__pycache__
 account/migrations
 
+payments/__pycache__
+payments/migrations
+
 _admin/__pycache__
 _admin/migrations
 __pycache__

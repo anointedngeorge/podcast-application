@@ -30,6 +30,9 @@
 
     <link rel="stylesheet" href="{{style}}/lightbox.css">
 
+    <link rel="stylesheet" href="{% static '/fontawesome/css/all.min.css' %}">
+    <script src="{% static '/fontawesome/js/all.min.js' %}"></script>
+
     <style>
         
         .vjs-poster{
@@ -61,7 +64,7 @@
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         <a href="/" class="logo">
-                            <img src="media/{% appsettings 'site_logo' %}" style="width:60px; height:60px; border-radius: 100px; " align="klassy cafe html template">
+                            <img src="/media/{% appsettings 'site_logo' %}" style="width:60px; height:60px; border-radius: 100px; " align="klassy cafe html template">
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->

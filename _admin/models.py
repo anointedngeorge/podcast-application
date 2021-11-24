@@ -117,6 +117,30 @@ class Podcast(models.Model):
     
     def get_absolute_url(self):
          return f"media/{self.file}"
+
+
+
+
+class contestant(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, 
+    null=True, related_name="contestant")
+    title = models.CharField(max_length = 150)
+    format = models.CharField(max_length=50, null=True, choices=(('video','Video'),))
+    file  = models.ForeignKey(Gallary, on_delete=models.CASCADE, null=True, related_name="contestantfile")
+    cover  = models.ForeignKey(Gallary, on_delete=models.CASCADE, null=True, related_name="contestantcover")
+    like = models.IntegerField(null=True)
+    dislike = models.IntegerField(null=True)
+    most_viewed = models.IntegerField(null=True)
+    vote = models.IntegerField(null=True)
+    amount = models.BigIntegerField(null=True)
+    approve = models.BooleanField(default=False, verbose_name="Show on website")
+    upload_at = models.DateField(auto_now=True,  blank=True, null=True)
+    
+    class Meta:
+        verbose_name_plural = "Contestant videos"
+
+    def __str__(self) -> str:
+        return f"{self.title}"
      
 
 

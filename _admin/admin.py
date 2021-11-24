@@ -115,3 +115,12 @@ class BlogAdmin(admin.ModelAdmin):
 class ExternalPodcastAdmin(admin.ModelAdmin):
     search_fields = ['title_startwith',]
     list_display = ['user','title','link','description','approve']
+
+
+
+
+@admin.register(contestant)
+class contestantAdmin(admin.ModelAdmin):
+ 
+    list_display = ['user','approve','title','format','file','cover','like','dislike','most_viewed','vote','amount']
+    actions = [approve_bulk, reject_bulk]

@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Payment Page</title>
+</head>
+<body>
+      <div class="container">
+            <div class="col-lg-4 d-flex">
+                <button type="button" onclick="payWithPaystack()"> Authorize Payment to Proceed</button> 
+            </div>
+      </div>
+
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    
+    
+    <script>
+
+            var paymentForms = document.getElementById('packageForm');
+                paymentForms.addEventListener('submit', payWithPaystack, false);
+            
+            function payWithPaystack() {
+                var handler = PaystackPop.setup({
+                    key: '{{PAYSTACK_PUBLIC_KEY}}', 
+                    email: '{{email}}',
+                    amount: '{{amount}}', // 100 is add to the actual price.,
+                    currency: 'NGN', 
+                    ref: '{{token}}',
+                    channels:['card', 'bank'],
+                    callback: function(response) {
+                        var reference = response.reference;
+                        window.location = "{% url 'payments:verify' token %}";
+                    },
+                    onClose: function() {
+                        alert('Transaction was not completed, window closed.');
+                    },
+                });
+                handler.openIframe();
+        }
+
+    </script>
+</body>
+</html>

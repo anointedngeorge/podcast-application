@@ -1,0 +1,114 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Complete Registration</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static '/payments/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static '/payments/css/sb-admin-2.min.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-5 col-lg-12 col-md-12 mt-5">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <!-- this is for the image -->
+                            <!-- <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> -->
+
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center mb-3">
+                                        <h1 class="h4 text-gray-900 mb-4">Complete Your Payment <span class="text text-primary"> {{request.user}}</span></h1>
+                                        <!-- <i>First Step: Make Payment to proceed to your dashboard.</i> -->
+                                    </div>
+                                    {% for message in messages %}
+                                        {{message}}
+                                    {% endfor %}
+                                    <form class="user"  id="packageForm" method="POST" action="{% url 'payments:package' %}">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            {{ uforms|crispy}}
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary btn-user btn-block" type="submit" onclick="payWithPaystack()">Proceed</button>
+                                            <!-- <input type="submit" value="Proceed" class="btn btn-primary btn-user btn-block"> -->
+                                        </div>
+                                    </form>
+                                    <hr>
+                                    <center>
+                                        <i>Initial payment is &#8358;2,200.</i>
+                                        <div id="message"></div>
+                                        <span class="text text-danger">Note: This account will be deleted after 24hours of non payment. </span>
+                                    </center>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static '/payments/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static '/payments/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static '/payments/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static '/payments/js/sb-admin-2.min.js' %}"></script>
+
+
+
+    <!-- <script>
+        packageForm.onsubmit = async event => {
+                event.preventDefault();
+            // 
+            let response = await fetch('{% url "payments:package" %}', {
+                method: 'POST',
+                body: new FormData(packageForm),
+            }).then(response => {
+                if(response.status === 200){
+                    $('#message').text('Message Sent').addClass('text text-success')
+                }else{
+                    $('#message').text('Message Not Sent').addClass('text text-danger')
+                }
+            })
+        }
+    </script> -->
+
+</body>
+
+</html>
+
