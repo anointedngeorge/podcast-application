@@ -73,6 +73,17 @@
             });
         });
 
+        function activityFunction(el) {
+            dataset = el.target.dataset
+            console.log(dataset);
+        }
+        $(document).ready(function() {
+           for (let index = 0; index < $('.activity-btn').length; index++) {
+               const element = $('.activity-btn')[index];
+                element.addEventListener('click', activityFunction, false)
+           }
+        })
+
     </script>
   </body>
 </html>
