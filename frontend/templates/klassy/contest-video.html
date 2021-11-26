@@ -52,7 +52,13 @@
                             <center>
                                 <button title="Likes" class="activity-btn " data-post_id="{{pod.id}}" data-user="{{pod.user.pk}}" data-tag="like"><i class="fa fa-thumbs-up text-primary"></i> (0)</button>
                                 <button title="Dislikes" class="activity-btn " data-post_id="{{pod.id}}" data-user="{{pod.user.pk}}" data-tag="dislike"><i class="fa fa-thumbs-down text-danger"></i> (0)</button>
-                                <button title="Vote" class="activity-btn-vote"  data-post_id="{{pod.id}}" data-user="{{pod.user.pk}}" data-tag="vote"><i class="fa fa-vote-yea text-info"></i> (0)</button>
+                                <button title="Vote" class="activity-btn-vote"  data-post_id="{{pod.id}}" data-user="{{pod.user.pk}}" data-tag="vote"><i class="fa fa-vote-yea text-info"></i> 
+                                {% if pod.vote != None %}
+                                ({{pod.vote}}%)
+                                {% else %}
+                                    (0)
+                                {% endif %}
+                                     </button>
                                 <button title="Most viewed" class="activity-btn "  data-post_id="{{pod.id}}" data-user="{{pod.user.pk}}" data-tag="viewed"><i class="fa fa-eye text-warning"></i> (0)</button>
                             </center>
                         </div>
