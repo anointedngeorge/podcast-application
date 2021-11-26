@@ -3,6 +3,6 @@ from _admin.models import *
 
 def contestants_videos(request):
     return {
-        'contestants_videos': contestant.objects.all().filter(approve = True)
+        'contestants_videos': contestant.objects.all().filter(approve = True).order_by('upload_at')
     }
-    # 'contestants_videos': contestant.objects.all().filter(approve = True).order_by('upload_at')
+    

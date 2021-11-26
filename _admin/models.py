@@ -125,7 +125,8 @@ class contestant(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, 
     null=True, related_name="contestant")
     title = models.CharField(max_length = 150)
-    format = models.CharField(max_length=50, null=True, choices=(('video','Video'),))
+    format = models.CharField(max_length=50, null=True, 
+    choices=(('video','Video'),))
     file  = models.ForeignKey(Gallary, on_delete=models.CASCADE, null=True, related_name="contestantfile")
     cover  = models.ForeignKey(Gallary, on_delete=models.CASCADE, null=True, related_name="contestantcover")
     like = models.IntegerField(null=True, blank=True)
