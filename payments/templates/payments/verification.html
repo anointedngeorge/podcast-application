@@ -1,15 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Confirmed</title>
-</head>
-<body>
-    {{message}}
+{% extends 'payments/header.html' %}
 
-    <!-- <a href="{% url 'users:account_login' %}">Proceed To Dashboard</a> -->
-    <a href="/">Homepage</a>
-</body>
-</html>
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1>Payment Completion</h1>
+    <p class="text text-center text-primary">Thank you!!!</p>
+  </div>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+            <button class="btn btn-danger btn-block" onclick="windowClose();"><i class="fa fa-times-circle"></i> Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    
+    function windowClose() {
+        window.close()
+    }
+      
+  </script>
+
+{% endblock content %}

@@ -98,10 +98,11 @@
             function activityFunction(el) {
                 let dataset = el.target.dataset
                 let userid = dataset['user']
+                let postid = dataset['post_id']
             if (userid != undefined ) {
                 let windowObjectReference = null; // global variable
                 let windowFeatures = "toolbar=no, menubar=no, popup=yes, scrollbars=no,resizable=no,top=100,left=500,width=700,height=500"
-                let url = "/package/"+userid;
+                let url = `/package/${postid}/${userid}`
                 
                 if(windowObjectReference == null || windowObjectReference.closed) {
                     windowObjectReference = window.open(url, "loadWindows", windowFeatures, true);

@@ -1,18 +1,52 @@
+{% extends 'payments/header.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Payment Page</title>
-</head>
-<body>
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+  
+
       <div class="container">
-            <div class="col-lg-4 d-flex">
-                <button type="button" onclick="payWithPaystack()"> Authorize Payment to Proceed</button> 
+      
+          <div class="col-lg-6 bg-white shadow p-3 mt-4">
+            <div>
+               {% if postid.format == 'video' %}
+               <video
+                   id="my-video"
+                   class="video-js"
+                   controls
+                   preload="auto"
+                   poster="/media/{{postid.cover}}"
+                   data-setup="{}"
+                   style="width:100% !important; 
+               height:200px !important; border-radius:10px;"
+               >
+                   <source src="/media/{{postid.file}}" type="video/mp4" />
+                   <p class="vjs-no-js">
+                   To view this video please enable JavaScript, and consider upgrading to a
+                   web browser that
+                   </p>
+               </video>
+           {% endif %}
+          
+              <!-- <audio src="media/{{postid.file}}" controls></audio> -->
+            </div>
+               <div class="mt-4 mb-4"><h3 class="text text-center" style="font-weight: 500;">{{postid.title}}</h3></div>
+               <div class="bg-danger p-2 rounded rounded-sm text text-white text-center" style="font-size: 10px;">
+                   <span class="mr-">Upload date: {{postid.created}}</span> |
+                   <span class="ml-">Posted By:  {{postid.user.username}}</span>
+               </div>
+ 
+        </div>
+
+            <div class="col-lg-4 d-flex mt-4 p-4">
+                <button type="button" class="btn btn-dark btn-block" onclick="payWithPaystack()"> <i class="fa fa-gift"></i> Authorize Payment to Proceed</button> 
             </div>
       </div>
+
+
+
 
     <script src="https://js.paystack.co/v1/inline.js"></script>
     
@@ -26,13 +60,15 @@
                 var handler = PaystackPop.setup({
                     key: '{{PAYSTACK_PUBLIC_KEY}}', 
                     email: '{{email}}',
-                    amount: '{{amount}}', // 100 is add to the actual price.,
+                    amount: parseInt('{{amount}}') * 100, // 100 is add to the actual price.,
                     currency: 'NGN', 
                     ref: '{{token}}',
                     channels:['card', 'bank'],
                     callback: function(response) {
                         var reference = response.reference;
-                        window.location = "{% url 'payments:verify' token %}";
+                        // postid will pass the post database instance
+                        window.location = "{% url 'payments:verify' token postid.id %}";
+                        
                     },
                     onClose: function() {
                         alert('Transaction was not completed, window closed.');
@@ -42,5 +78,5 @@
         }
 
     </script>
-</body>
-</html>
+
+{% endblock content %}
