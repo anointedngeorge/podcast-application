@@ -136,6 +136,7 @@ class contestant(models.Model):
     amount = models.BigIntegerField(null=True, blank=True)
     approve = models.BooleanField(default=False, verbose_name="Show on website")
     upload_at = models.DateTimeField(auto_now=True,  blank=True, null=True)
+    created = models.DateField(auto_now=True,  blank=True, null=True)
     
     class Meta:
         verbose_name_plural = "Contestant videos"
@@ -144,12 +145,6 @@ class contestant(models.Model):
         return f"{self.title}"
      
 
-
-    
-
-   
-
-    
 
 
 class PodcastExtra(models.Model):
@@ -167,9 +162,7 @@ class PodcastExtra(models.Model):
         return f"{self.title}"
     
 
-
 # blog section
-
 class Blog(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     type = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
