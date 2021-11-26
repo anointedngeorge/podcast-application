@@ -25,7 +25,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primar">
 
     <div class="container">
 
@@ -44,13 +44,14 @@
                             <div class="col-lg-12">
                                 <div class="p-5">
                                     <div class="text-center mb-3">
-                                        <h1 class="h4 text-gray-900 mb-4">Complete Your Payment <span class="text text-primary"> {{request.user}}</span></h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Vote for <span class="text text-primary"> ({{user}}) </span></h1>
                                         <!-- <i>First Step: Make Payment to proceed to your dashboard.</i> -->
                                     </div>
                                     {% for message in messages %}
                                         {{message}}
                                     {% endfor %}
-                                    <form class="user"  id="packageForm" method="POST" action="{% url 'payments:package' %}">
+
+                                    <form class="user"  id="packageForm" method="POST" action="{% url 'payments:package' userid %}">
                                         {% csrf_token %}
                                         <div class="form-group">
                                             {{ uforms|crispy}}
@@ -62,9 +63,9 @@
                                     </form>
                                     <hr>
                                     <center>
-                                        <i>Initial payment is &#8358;2,200.</i>
-                                        <div id="message"></div>
-                                        <span class="text text-danger">Note: This account will be deleted after 24hours of non payment. </span>
+                                        <span class="text text-danger">
+                                            <i class="fa fa-laptop-code fa-lg"></i>
+                                        </span>
                                     </center>
 
                                 </div>
@@ -95,7 +96,7 @@
         packageForm.onsubmit = async event => {
                 event.preventDefault();
             // 
-            let response = await fetch('{% url "payments:package" %}', {
+            let response = await fetch('{% url "payments:package" userid %}', {
                 method: 'POST',
                 body: new FormData(packageForm),
             }).then(response => {

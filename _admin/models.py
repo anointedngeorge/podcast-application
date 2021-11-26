@@ -128,13 +128,13 @@ class contestant(models.Model):
     format = models.CharField(max_length=50, null=True, choices=(('video','Video'),))
     file  = models.ForeignKey(Gallary, on_delete=models.CASCADE, null=True, related_name="contestantfile")
     cover  = models.ForeignKey(Gallary, on_delete=models.CASCADE, null=True, related_name="contestantcover")
-    like = models.IntegerField(null=True)
-    dislike = models.IntegerField(null=True)
-    most_viewed = models.IntegerField(null=True)
-    vote = models.IntegerField(null=True)
-    amount = models.BigIntegerField(null=True)
+    like = models.IntegerField(null=True, blank=True)
+    dislike = models.IntegerField(null=True, blank=True)
+    most_viewed = models.IntegerField(null=True, blank=True)
+    vote = models.IntegerField(null=True, blank=True)
+    amount = models.BigIntegerField(null=True, blank=True)
     approve = models.BooleanField(default=False, verbose_name="Show on website")
-    upload_at = models.DateField(auto_now=True,  blank=True, null=True)
+    upload_at = models.DateTimeField(auto_now=True,  blank=True, null=True)
     
     class Meta:
         verbose_name_plural = "Contestant videos"

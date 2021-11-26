@@ -11,7 +11,9 @@ from .models import Payment
 
 
 class package(forms.Form):
-    payment = forms.CharField(required=True, 
-    widget=forms.TextInput(attrs={'class':'form-control form-control-user', 'value':5000}))
+    email = forms.EmailField(required=True, 
+    widget=forms.TextInput(attrs={'class':'form-control form-control-user', 'placeholder':'Email Address'}))
+    amount = forms.CharField(required=True, 
+    widget=forms.TextInput(attrs={'class':'form-control form-control-user', 'placeholder':'N5000'}))
 
 

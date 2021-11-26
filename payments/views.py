@@ -1,3 +1,4 @@
+from django.urls.base import reverse
 import requests as req
 from django.http import request, HttpResponse
 from django.contrib.auth.models import User
@@ -10,7 +11,9 @@ import uuid
 # for enviroment variables 
 from decouple import config
 from .paystack import Paystack
-from users.models import Profile
+# from users.models import Profile
+from account.models import Profile
+from authModel.models import AppAuthUser
 
 
 
@@ -35,24 +38,25 @@ class Package(TemplateView):
         return context
     
     def get(self, request, *args, **kwargs):
-        try:
-            if request.user.profile.registration_status ==  True:
-                return redirect("/login/")
-            return render(request, self.template_name , self.get_context_data())
-        except Exception as e:
-            return redirect("/") 
+        userdata = AppAuthUser.objects.all().get(pk=int(kwargs.get('userid')))
+        context = self.get_context_data()
+        context.update({'user':userdata.username})
+        context.update({'userid':kwargs.get('userid')})
+        
+        return render(request, self.template_name, context=context)
+
     
     def post(self, request, *args, **kwargs):
         form = package(request.POST)
         if form.is_valid():
-            if Payment.objects.filter(user = request.user).exists() == False:
-                amount = form.cleaned_data.get('payment')
-                Payment.objects.create(
+            # if Payment.objects.filter(user = request.user).exists() == False:
+            amount = int(form.cleaned_data.get('amount'))
+            Payment.objects.create(
                     user = request.user,
                     amount = amount - 200,
                     savings = 200
-                ).save()
-                return render(request, 'payments/paystack.html', self.get_context_data())
+                )
+                # return render(request, 'payments/paystack.html', self.get_context_data())
             # 
         return render(request, 'payments/paystack.html', self.get_context_data())
 
@@ -80,5 +84,6 @@ def verify_payment(request, reference:str):
         else:
             pass
     except Exception as e:
-        return redirect('/')
+        print(e)
+        # return redirect('/')
     return HttpResponse('hiiiii')

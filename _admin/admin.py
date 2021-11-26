@@ -122,5 +122,5 @@ class ExternalPodcastAdmin(admin.ModelAdmin):
 @admin.register(contestant)
 class contestantAdmin(admin.ModelAdmin):
  
-    list_display = ['user','approve','title','format','file','cover','like','dislike','most_viewed','vote','amount']
+    list_display = ['user','approve','title','format','file','cover','like','dislike','most_viewed','vote','amount','upload_at',]
     actions = [approve_bulk, reject_bulk]

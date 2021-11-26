@@ -5,13 +5,14 @@ from django.contrib import admin
 from django.urls import path, include
 
 
-
+app_name = "payments"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('_dashboard.urls') ),
     path('', include('frontend.urls') ),
     path('', include('account.urls') ),
+    path('', include('payments.urls') ),
 
 
     # 

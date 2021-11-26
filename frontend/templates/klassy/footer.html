@@ -72,18 +72,59 @@
                 
             });
         });
+    
 
-        function activityFunction(el) {
-            dataset = el.target.dataset
-            console.log(dataset);
+        function activity_interaction() {
+
+            function activityFunction(el) {
+                dataset = el.target.dataset
+                console.log(dataset);
+                console.log(dataset['post_id'], dataset['tag'])
+            }
+            $(document).ready(function() {
+                let elem = $('.activity-btn');
+                for (let index = 0; index < elem.length; index++) {
+                    const element = elem[index];
+                        element.addEventListener('click', activityFunction, false)
+                }
+            })
         }
-        $(document).ready(function() {
-           for (let index = 0; index < $('.activity-btn').length; index++) {
-               const element = $('.activity-btn')[index];
-                element.addEventListener('click', activityFunction, false)
-           }
-        })
 
+        activity_interaction()
+
+
+
+        function activity_interaction_vote() {
+            function activityFunction(el) {
+                let dataset = el.target.dataset
+                let userid = dataset['user']
+            if (userid != undefined ) {
+                let windowObjectReference = null; // global variable
+                let windowFeatures = "toolbar=no, menubar=no, popup=yes, scrollbars=no,resizable=no,top=100,left=500,width=700,height=500"
+                let url = "/package/"+userid;
+                
+                if(windowObjectReference == null || windowObjectReference.closed) {
+                    windowObjectReference = window.open(url, "loadWindows", windowFeatures, true);
+                }else{
+                    windowObjectReference.focus();
+                }
+
+            }else{
+                alert('Click on the vote icon')
+            }
+                
+            }
+            $(document).ready(function() {
+                let elem = $('.activity-btn-vote');
+                for (let index = 0; index < elem.length; index++) {
+                        const element = elem[index];
+                        element.addEventListener('click', activityFunction, false)
+                }
+            })
+        }
+
+        activity_interaction_vote()
+    
     </script>
   </body>
 </html>

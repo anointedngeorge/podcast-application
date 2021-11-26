@@ -6,6 +6,6 @@ from .views import Package
 app_name = "payments"
 
 urlpatterns = [
-    path('package/', Package.as_view(), name='package'),
+    path('package/<int:userid>', Package.as_view(), name='package'),
     path('verify/<str:reference>/', views.verify_payment, name='verify'),
 ]
