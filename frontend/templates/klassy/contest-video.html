@@ -10,7 +10,65 @@
 {% block content %}
 <br><br><br><br><br>
 
-{{contestants_videos}}
+<div class="container justify-content-center">
+    <div class="col-lg-12">
+        <section class='tabs-conten'>
+           <div class="row">
+            {% for pod in contestants_videos %}
+                 <div class="col-lg-3 bg-white shadow p-3">
+                     <div>
+                        {% if pod.format == 'video' %}
+                        <video
+                            id="my-video"
+                            class="video-js"
+                            controls
+                            preload="auto"
+                            poster="/media/{{pod.cover}}"
+                            data-setup="{}"
+                            style="width:100% !important; 
+                        height:200px !important; border-radius:10px;"
+                        >
+                            <source src="/media/{{pod.file}}" type="video/mp4" />
+                            <p class="vjs-no-js">
+                            To view this video please enable JavaScript, and consider upgrading to a
+                            web browser that
+                            </p>
+                        </video>
+                    {% endif %}
+                            
+                       <!-- <audio src="media/{{pod.file}}" controls></audio> -->
+                     </div>
+                        <div class="mt-4 mb-4"><h3 class="text text-center" style="font-weight: 500;">{{pod.title}}</h3></div>
+                        <div class="bg-danger p-2 rounded rounded-sm text text-white text-center" style="font-size: 10px;">
+                            <span class="mr-">Upload date: {{pod.upload_at}}</span> |
+                            <span class="ml-">Posted By:  {{pod.user.username}}</span>
+                        </div>
+                    
+                    <div class="mt-4">
+                        <!-- <span>{% post_to_facebook pod.get_absolute_url "Share to fb" %}</span> -->
+                        <div class="fb-share-button" data-href="https://demtgfamily.com/view-podcast?cat_id=1&amp;pod_id=3" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdemtgfamily.com%2Fview-podcast%3Fcat_id%3D1%26pod_id%3D3&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+                        <div class="p-2">
+                       
+                            <center>
+                                <button title="Likes" class="activity-btn " data-post_id="{{pod.id}}" data-user="{{pod.user.pk}}" data-tag="like"><i class="fa fa-thumbs-up text-primary"></i> (0)</button>
+                                <button title="Dislikes" class="activity-btn " data-post_id="{{pod.id}}" data-user="{{pod.user.pk}}" data-tag="dislike"><i class="fa fa-thumbs-down text-danger"></i> (0)</button>
+                                <button title="Vote" class="activity-btn-vote"  data-post_id="{{pod.id}}" data-user="{{pod.user.pk}}" data-tag="vote"><i class="fa fa-vote-yea text-info"></i> (0)</button>
+                                <button title="Most viewed" class="activity-btn "  data-post_id="{{pod.id}}" data-user="{{pod.user.pk}}" data-tag="viewed"><i class="fa fa-eye text-warning"></i> (0)</button>
+                            </center>
+                        </div>
+                    </div>
+
+                 </div>
+       
+            {% endfor %}
+           </div>
+           
+        </section>
+    </div>
+</div>
+
+
+
 
 
 {% endblock %}
