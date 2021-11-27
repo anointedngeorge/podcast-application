@@ -108,7 +108,7 @@ def verify_payment(request, reference:str, postid:str):
                 # user_data.reference = reference
                 user_data.save()
                 percentage = (0.1) / 100 * user_data.amount
-                posts.vote = percentage
+                posts.vote += percentage
                 posts.save()
 
                 messages.success(request, verify_payment['message'])
