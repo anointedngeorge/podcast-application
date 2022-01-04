@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import render
 from django.contrib import admin
-from django.contrib.admin.decorators import action
+# from django.contrib.admin.decorators import action
 from django.utils.translation import activate
 from _admin.models import *
 from django.http import HttpResponse
@@ -128,7 +128,7 @@ class PodcastExtraAdmin(admin.TabularInline):
 
 
 # custom action
-@admin.action(description="export as json")
+# admin.action(description="export as json")
 def export_as_json(modeladmin, request, queryset):
     response = HttpResponse(content_type="application/json")
     serializers.serialize("json", queryset, stream=response)

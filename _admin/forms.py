@@ -2,7 +2,7 @@ from django import forms
 from django.db.models import fields
 from django.db.models.query_utils import Q
 from django.forms import widgets
-from django.contrib.admin.decorators import display
+# from django.contrib.admin.decorators import display
 from django.forms.widgets import CheckboxInput, PasswordInput, ChoiceWidget
 from django.conf import settings
 from .models import *
