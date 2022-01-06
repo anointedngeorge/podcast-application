@@ -35,7 +35,7 @@ class AdminProfileUsers(admin.ModelAdmin):
 
 
 @admin.register(ApplicationSettings)
-class GeneralSettings(admin.ModelAdmin):
+class ApplicationSettingsSettings(admin.ModelAdmin):
     search_fields = ['site_title__startwith']
     list_display = ['site_title','tagline_title','site_descriptions',
     'site_logo','site_favicon','phone1','phone2','email1','email2']
@@ -51,7 +51,8 @@ class GallerySettings(admin.ModelAdmin):
     actions = [approve_bulk, reject_bulk]
 
     class Media:
-        js = ['/static/js/fileuploader_with_progress_bar.js']
+        # js = ['/static/js/fileuploader_with_progress_bar.js']
+        pass
 
 
     def html_format(self, obj):
