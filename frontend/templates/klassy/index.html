@@ -173,9 +173,9 @@
                 </div>
             </div>
         </div>
-        <div class="menu-item-carouse">
+        <div class="menu-item-carousel">
             <div class="col">
-                <div class="owl-menu-item owl-carousel">
+                <div class="owl-menu-item owl-carouse">
                     {% for pod in cat.podcastcategory.filter %}
                     {% if pod.approve %}
                     <div class="item" >
@@ -188,28 +188,28 @@
                                     class="video-js"
                                     controls
                                     preload="auto"
-                                    poster="media/{{pod.cover}}"
+                                    poster="{{request.META.SCRIPT_NAME}}/media/{{pod.cover}}"
                                     data-setup="{}"
 
                                     style="width:100% !important; 
                                 height:200px !important; border-radius:10px;"
                                 >
-                                    <source src="media/{{pod.file}}" type="video/mp4" />
+                                    <source src="{{request.META.SCRIPT_NAME}}/media/{{pod.file}}" type="video/mp4" />
                                     <p class="vjs-no-js">
                                     To view this video please enable JavaScript, and consider upgrading to a
                                     web browser that
                                     </p>
                                 </video>
                             {% elif pod.format == 'audio' %}
-                                <img src="media/{{pod.cover}}" alt="" style="width:100% !important; 
+                                <img src="{{request.META.SCRIPT_NAME}}/media/{{pod.cover}}" alt="" style="width:100% !important; 
                                 height:200px !important; border-radius:10px;">
-                                    <audio src="media/{{pod.file}}" 
+                                    <audio src="{{request.META.SCRIPT_NAME}}/media/{{pod.file}}" 
                                         style="width:100% !important; 
                                         border-radius:10px;"
                                         poster="media/{{pod.cover}}" controls>
                                     </audio>
                             {% else %}
-                                <img src="media/{{pod.cover}}" alt="" style="width:100% !important; 
+                                <img src="{{request.META.SCRIPT_NAME}}/media/{{pod.cover}}" alt="" style="width:100% !important; 
                                 height:200px !important; border-radius:10px;">
                             {% endif %}
                                     
