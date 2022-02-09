@@ -173,72 +173,61 @@
                 </div>
             </div>
         </div>
-        <div class="menu-item-carousel">
-            <div class="col">
-                <div class="owl-menu-item owl-carouse">
-                    {% for pod in cat.podcastcategory.filter %}
-                    {% if pod.approve %}
-                    <div class="item" >
-                      
-                        <div class='card card1'>
-                            <div>
-                                {% if pod.format == 'video' %}
-                                <video
-                                    id="my-video"
-                                    class="video-js"
-                                    controls
-                                    preload="auto"
-                                    poster="{{request.META.SCRIPT_NAME}}/media/{{pod.cover}}"
-                                    data-setup="{}"
+        <div class="container">
+            <div class="row">
+                {% for pod in cat.podcastcategory.filter %}
+                {% if pod.approve %}
+                <div class="col-lg-3">
+                    <div class="card">
+                        {% if pod.format == 'video' %}
+                    <video
+                        id="my-video"
+                        class="video-js"
+                        controls
+                        preload="auto"
+                        poster="{{request.META.SCRIPT_NAME}}/media/{{pod.cover}}"
+                        data-setup="{}"
 
-                                    style="width:100% !important; 
-                                height:200px !important; border-radius:10px;"
-                                >
-                                    <source src="{{request.META.SCRIPT_NAME}}/media/{{pod.file}}" type="video/mp4" />
-                                    <p class="vjs-no-js">
-                                    To view this video please enable JavaScript, and consider upgrading to a
-                                    web browser that
-                                    </p>
-                                </video>
-                            {% elif pod.format == 'audio' %}
-                                <img src="{{request.META.SCRIPT_NAME}}/media/{{pod.cover}}" alt="" style="width:100% !important; 
-                                height:200px !important; border-radius:10px;">
-                                    <audio src="{{request.META.SCRIPT_NAME}}/media/{{pod.file}}" 
-                                        style="width:100% !important; 
-                                        border-radius:10px;"
-                                        poster="media/{{pod.cover}}" controls>
-                                    </audio>
-                            {% else %}
-                                <img src="{{request.META.SCRIPT_NAME}}/media/{{pod.cover}}" alt="" style="width:100% !important; 
-                                height:200px !important; border-radius:10px;">
-                            {% endif %}
-                                    
-                               <!-- <audio src="media/{{pod.file}}" controls></audio> -->
-                             </div>
-                            <div class="mt-4">
-                                <h1 class="h3 text text-center">
-                                    <a href="view-podcast?cat_id={{cat.id}}&pod_id={{pod.id}}">{{pod.title}}</a>
-                                </h1>
-                                    <center>
-                                        {% if pod.description|safe != 'None' %}
-                                            {{pod.description|safe|slice:'100'}}
-                                        {% else %}
-                                            <i>No descriition</i>
-                                        {% endif %}
-                                    </center>
-                                    <div class="row">
-                                        <div class="col-lg-12 bg-danger text-white text-center">
-                                            Posted {% podcastDays pod.upload_at %} ago.
-                                        </div>
-                                    </div>
-                            </div>
+                        style="width:100% !important; 
+                    height:200px !important; border-radius:10px;"
+                    >
+                        <source src="{{request.META.SCRIPT_NAME}}/media/{{pod.file}}" type="video/mp4" />
+                        <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a
+                        web browser that
+                        </p>
+                    </video>
+                {% elif pod.format == 'audio' %}
+                    <img src="{{request.META.SCRIPT_NAME}}/media/{{pod.cover}}" alt="" style="width:100% !important; 
+                    height:200px !important; border-radius:10px;">
+                        <audio src="{{request.META.SCRIPT_NAME}}/media/{{pod.file}}" 
+                            style="width:100% !important; 
+                            border-radius:10px;"
+                            poster="media/{{pod.cover}}" controls>
+                        </audio>
+                {% else %}
+                    <img src="{{request.META.SCRIPT_NAME}}/media/{{pod.cover}}" alt="" style="width:100% !important; 
+                    height:200px !important; border-radius:10px;">
+                {% endif %}
+                        <div class="card-body">
+                          <h5 class="card-title text text-center"><a href="view-podcast?cat_id={{cat.id}}&pod_id={{pod.id}}">{{pod.title}}</a></h5>
+                          <p class="card-text text text-center">
+                            {% if pod.description|safe != 'None' %}
+                            {{pod.description|safe|slice:'100'}}
+                        {% else %}
+                            <i>No descriition</i>
+                        {% endif %}
+                          </p>
+                          <center>
+                            <p>Posted {% podcastDays pod.upload_at %} ago.</p>
+                          </center>
+                        
                         </div>
-                
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-
+                      </div>
                 </div>
+                {% endif %}
+                {% endfor %}
+
             </div>
         </div>
     </section>
