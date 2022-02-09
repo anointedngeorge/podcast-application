@@ -34,22 +34,22 @@
                     style="width:100% !important; 
                 height:300px !important; border-radius:10px;"
                 >
-                    <source src="media/{{pod.file}}" type="video/mp4" />
+                    <source src="{{request.META.SCRIPT_NAME}}/media/{{pod.file}}" type="video/mp4" />
                     <p class="vjs-no-js">
                     To view this video please enable JavaScript, and consider upgrading to a
                     web browser that
                     </p>
                 </video>
             {% elif pod.format == 'audio' %}
-                <img src="media/{{pod.cover}}" alt="" style="width:100% !important; 
+                <img src="{{request.META.SCRIPT_NAME}}/media/{{pod.cover}}" alt="" style="width:100% !important; 
                 height:300px !important; border-radius:10px;">
-                    <audio src="media/{{pod.file}}" 
+                    <audio src="{{request.META.SCRIPT_NAME}}/media/{{pod.file}}" 
                         style="width:100% !important; 
                         border-radius:10px;"
-                        poster="media/{{pod.cover}}" controls>
+                        poster="{{request.META.SCRIPT_NAME}}/media/{{pod.cover}}" controls>
                     </audio>
             {% else %}
-                <img src="media/{{pod.cover}}" alt="" style="width:100% !important; 
+                <img src="{{request.META.SCRIPT_NAME}}/media/{{pod.cover}}" alt="" style="width:100% !important; 
                 height:300px !important; border-radius:10px;">
             {% endif %}
 
