@@ -16,9 +16,9 @@ class PodcastForm(forms.ModelForm):
         model = Podcast
         fields = ['user','type','format','description','title','file','cover']
 
-    def __init__(self, *args, **kwargs):
-        super(PodcastForm, self).__init__(*args, **kwargs)
-        self.fields['type'].queryset = Category.objects.filter(Q(db_table = self._meta.model.__name__))
+    # def __init__(self, *args, **kwargs):
+    #     super(PodcastForm, self).__init__(*args, **kwargs)
+    #     self.fields['type'].queryset = Category.objects.filter(Q(db_table = self._meta.model.__name__))
 
       
 
